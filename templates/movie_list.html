@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Movie List{% endblock %}
+
+{% block content %}
+<h2>Movie List</h2>
+
+{% if movies %}
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.title }}</strong>
+                {% if movie.description %}
+                    <p>{{ movie.description }}</p>
+                {% endif %}
+                {% if movie.release_date %}
+                    <small>Released: {{ movie.release_date }}</small>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies available.</p>
+{% endif %}
+
+{% endblock %}
