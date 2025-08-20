@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Movie Reviews</h1>
+
+{% if user.is_authenticated %}
+<p>Hi, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+<p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'signup' %}">Sign Up</a></p>
+{% endif %}
+
+<h2>All Movies</h2>
+<div>
+    {% for movie in movies %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <h3>{{ movie.title }} ({{ movie.genre }})</h3>
+        <p>{{ movie.description|truncatewords:20 }}</p>
+        <a href="{% url 'movie_detail' movie.id %}">View Details</a>
+    </div>
+    {% empty %}
+    <p>No movies available.</p>
+    {% endfor %}
+</div>
+{% endblock %}
